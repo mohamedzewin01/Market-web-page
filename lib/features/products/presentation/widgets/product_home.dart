@@ -1,13 +1,15 @@
-import 'package:fadaalhalij/features/products/data/models/model.dart';
 import 'package:fadaalhalij/features/products/presentation/widgets/products_items.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domain/products_entities/products_entities.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
     super.key,
+    required this.productsList,
   });
 
+  final List<ProductsEntity> productsList;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,17 +21,8 @@ class HomeBody extends StatelessWidget {
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
             childAspectRatio: 6 / 9),
-        itemCount: 10,
+        itemCount: productsList.length,
         itemBuilder: (context, index) {
-          ProductModel  productModel=ProductModel(
-          id: 21,
-          title: 'sdasdasd',
-          price: 22,
-          description: 'sdasadsad',
-          category: 'category',
-          image: 'https://artawiya.com/fadaalhalj/upLoad/image_default.jpg',
-          rating:RatingModel(rate: 50, count: 10));
-         List<ProductModel>productsList= List.generate(10, (index) =>productModel ,);
           return CustomProductsItem(
             product:productsList[index],
           );

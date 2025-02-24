@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../core/resources/color_manager.dart';
-import '../../data/models/model.dart';
+import '../../domain/products_entities/products_entities.dart';
 
 class CustomProductsItem extends StatelessWidget {
   const CustomProductsItem({
@@ -9,12 +10,10 @@ class CustomProductsItem extends StatelessWidget {
     required this.product,
   });
 
-  final ProductModel product;
+  final ProductsEntity product;
 
   @override
   Widget build(BuildContext context) {
-    double oldPrice = product.price + 15;
-
     return Stack(
       children: [
         Container(
@@ -36,23 +35,24 @@ class CustomProductsItem extends StatelessWidget {
                     child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child:
-                        // Image.network( 'https://artawiya.com/fadaalhalj/upLoad/image_default.png'),
-
                         CachedNetworkImage(
-                            imageUrl:
-                                'https://fitness.elevateegy.com/uploads/default-profile.png',
-                          placeholder: (context, url) => CircularProgressIndicator(),
+                          imageUrl:
+                              'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}',
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
                           errorWidget: (context, url, error) => Icon(Icons.error),
-                        )
-                    )
+                        ))
                 ),
               ),
               Padding(
+
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Text(
-                      product.title,
+                      product.productName ?? '',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           color: ColorManager.orange,
@@ -61,7 +61,7 @@ class CustomProductsItem extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      product.description,
+                      product.description ?? '',
                       style: const TextStyle(
                         color: ColorManager.orange,
                         fontSize: 14,
@@ -77,7 +77,7 @@ class CustomProductsItem extends StatelessWidget {
                         Row(
                           children: [
                             const Text(
-                              'EGP',
+                              'ريال',
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w900,
@@ -87,7 +87,8 @@ class CustomProductsItem extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              product.price.toString(),
+                              product.productpriceAfterDiscount.toString() ??
+                                  '',
                               style: const TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 14,
@@ -102,7 +103,7 @@ class CustomProductsItem extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                oldPrice.toStringAsFixed(2),
+                                product.productprice.toString() ?? '',
                                 style: const TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold,
@@ -124,44 +125,6 @@ class CustomProductsItem extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          'Review',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(product.rating.rate.toString(),
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        const Icon(
-                          Icons.star,
-                          color: ColorManager.primary,
-                          size: 20,
-                        ),
-                        const Spacer(),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: ColorManager.primary,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        )
                       ],
                     ),
                   ],
