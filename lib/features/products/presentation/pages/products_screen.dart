@@ -30,7 +30,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: ColorManager.grey,
+          backgroundColor: ColorManager.white,
           body: BlocProvider(
             create: (context) => viewModel..getProductsData(),
             child: BlocBuilder<ProductsCubit, ProductsState>(

@@ -18,8 +18,8 @@ class HomeBody extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 0,
             childAspectRatio: 6 / 9),
         itemCount: productsList.length,
         itemBuilder: (context, index) {

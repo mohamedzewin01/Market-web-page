@@ -15,6 +15,6 @@ abstract class ApiService {
   @FactoryMethod()
   factory ApiService(Dio dio) = _ApiService;
 
-  @GET(ApiConstants.allProducts)
+  @POST(ApiConstants.allProducts)
   Future<ProductModel> getAllCategories();
 }
