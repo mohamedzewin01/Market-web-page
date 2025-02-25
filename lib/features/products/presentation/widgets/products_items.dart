@@ -26,127 +26,125 @@ class CustomProductsItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    decoration: const BoxDecoration(
-                        // color: Colors.orange,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12))),
-                    child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child:
-                            // Image.network(
-                            //     'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}'),
-                            CachedNetworkImage(
-                          imageUrl:
-                              'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}',
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Skeletonizer(
-                                  child: Image.asset(
-                                      'assets/images/image_default.jpg')),
-                          errorWidget: (context, url, error) => Image.asset(
-                            'assets/images/image_default.jpg',
-                            fit: BoxFit.fill,
-                          ),
-                        ))),
+                  clipBehavior: Clip.antiAlias,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  decoration: const BoxDecoration(
+                      // color: Colors.orange,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12))),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child:
+                        // Image.network(
+                        //     'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}'),
+                        CachedNetworkImage(
+                      imageUrl:
+                          'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}',
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Skeletonizer(
+                              child: Image.asset(
+                                  'assets/images/image_default.jpg')),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/images/image_default.jpg',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               // Divider(),
-              Card(
-                // elevation: 1,
-                color: ColorManager.yellow,
-                child: Column(
-                  children: [
-                    Text(
-                      product.productName ?? '',
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
-                          color: ColorManager.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              product.description ?? '',
-                              // textDirection: TextDirection.rtl,
-                              maxLines: 1,
-                              textAlign: TextAlign.right,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: ColorManager.primary,
-                                fontSize: 14,
-                              ),
+              Column(
+                children: [
+                  Text(
+                    product.productName ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.roboto(
+                        color: ColorManager.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            product.description ?? '',
+                            // textDirection: TextDirection.rtl,
+                            maxLines: 1,
+                            textAlign: TextAlign.right,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: ColorManager.primary,
+                              fontSize: 14,
                             ),
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Divider(
+                    color: ColorManager.placeHolderColor,
+                  ),
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        product.productpriceAfterDiscount != 0
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const CustomRiyalSaudi(
+                                    color: ColorManager.primary,
+                                    size: 12,
+                                  ),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    product.productprice.toString() ?? '',
+                                    style: const TextStyle(
+                                      color: ColorManager.primary,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      decoration: TextDecoration.lineThrough,
+                                      decorationColor: ColorManager.primary,
+                                      decorationThickness: 2,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox(),
+                        VerticalDivider(
+                          color: ColorManager.placeHolderColor,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CustomRiyalSaudi(),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              product.productpriceAfterDiscount.toString() ??
+                                  '',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 18,
+                                  color: ColorManager.error),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      color: ColorManager.placeHolderColor,
-                    ),
-                    IntrinsicHeight(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          product.productpriceAfterDiscount != 0
-                              ? Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const CustomRiyalSaudi(
-                                      color: ColorManager.primary,
-                                      size: 12,
-                                    ),
-                                    const SizedBox(
-                                      width: 3,
-                                    ),
-                                    Text(
-                                      product.productprice.toString() ?? '',
-                                      style: const TextStyle(
-                                        color: ColorManager.primary,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                        decoration: TextDecoration.lineThrough,
-                                        decorationColor: ColorManager.primary,
-                                        decorationThickness: 2,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : const SizedBox(),
-                          VerticalDivider(
-                            color: ColorManager.placeHolderColor,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomRiyalSaudi(),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                product.productpriceAfterDiscount.toString() ??
-                                    '',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 18,
-                                    color: ColorManager.error),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
