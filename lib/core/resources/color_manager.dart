@@ -13,7 +13,9 @@ class ColorManager {
   static const Color fieldTextBorder = Color(0xffD3D3D3);
   static const Color basicColor = Color(0xffFF4100);
   static const Color offwhite = Color(0xffD9D9D9);
+  static const Color primaryColor = Color(0xff00eefb);
   static const Color mainColor = Color(0XFFFF4100);
+  static const Color yellow = Color(0xFFF2E036);
   static const Color pink = Color(0xffD21E6A);
   static const Color colorOfEmailVerification = Color(0xffDFE7F7);
   static const Color lightGrey2 = Color(0xff7D7D7D);
