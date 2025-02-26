@@ -1,5 +1,6 @@
 import 'package:fadaalhalij/core/di/di.dart';
 import 'package:fadaalhalij/core/resources/color_manager.dart';
+import 'package:fadaalhalij/core/resources/style_manager.dart';
 import 'package:fadaalhalij/features/products/presentation/widgets/skeleton_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,37 +42,59 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   return const SkeletonHome();
                 }
                 if (state is ProductsSuccess) {
-                  return NestedScrollView(
-                      headerSliverBuilder: (context, innerBoxIsScrolled) {
-                        return [
-                          SliverAppBar(
-                              backgroundColor: ColorManager.white,
-                              title: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 30, left: 30),
-                                child: Text(
-                                  'فضاء الخليج',
-                                  style: GoogleFonts.harmattan(
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorManager.white),
-                                ),
-                              ),
-                              expandedHeight: 200,
-                              flexibleSpace: FlexibleSpaceBar(
-                                centerTitle: true,
-                                background: Image.asset(
-                                  'assets/images/delivery-goods-blue-surface.jpg',
-                                  fit: BoxFit.cover,
-                                ),
-                              )),
-                        ];
-                      },
-                      body: HomeBody(
-                        productsList: state.productModelEntity.products ?? [],
-                      ));
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: NestedScrollView(
+                            headerSliverBuilder: (context, innerBoxIsScrolled) {
+                              return [
+                                SliverAppBar(
+                                    backgroundColor: ColorManager.white,
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 30, left: 30),
+                                      child: Text(
+                                        'فضاء الخليج',
+                                        style: GoogleFonts.harmattan(
+                                            fontSize: 35,
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorManager.white),
+                                      ),
+                                    ),
+                                    expandedHeight: 200,
+                                    flexibleSpace: FlexibleSpaceBar(
+                                      centerTitle: true,
+                                      background: Image.asset(
+                                        'assets/images/delivery-goods-blue-surface.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ];
+                            },
+                            body: HomeBody(
+                              productsList:
+                                  state.productModelEntity.products ?? [],
+                            )),
+                      ),
+                      Center(
+                          child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                                color: ColorManager.yellow,
+                                child: Center(
+                                    child: Text(
+                                  'تموينات فضاء الخيلج - الارطاوية ',
+                                  style:
+                                      getBoldStyle(color: ColorManager.error),
+                                ))),
+                          ),
+                        ],
+                      ))
+                    ],
+                  );
                 }
-                return Text('zzzzz');
+                return Center(child: Text('error'));
               },
             ),
           ),

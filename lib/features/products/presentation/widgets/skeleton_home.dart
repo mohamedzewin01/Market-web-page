@@ -1,9 +1,10 @@
-import 'package:fadaalhalij/features/products/presentation/widgets/products_items.dart';
+import 'package:fadaalhalij/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/resources/color_manager.dart';
+import '../../../../core/widgets/custom_riyal_saudi.dart';
 
 class SkeletonHome extends StatelessWidget {
   const SkeletonHome({super.key});
@@ -38,19 +39,13 @@ class SkeletonHome extends StatelessWidget {
                                 topRight: Radius.circular(12))),
                         child: AspectRatio(
                           aspectRatio: 16 / 9,
-                          child: Image.network(
-                              'https://artawiya.com/fadaalhalj/api/v1/upload/9596splash_logo.jpeg'),
-                          //     CachedNetworkImage(
-                          //       imageUrl:
-                          //           'https://artawiya.com/fadaalhalj/api/v1/upload/${product.imageCover}',
-                          //     )
+                          child: Image.asset(Assets.assetsImagesImageDefault),
                         )),
                   ),
-                  // Divider(),
                   Column(
                     children: [
                       Text(
-                        'product.productName ?? ' '',
+                        'product.productName ',
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.roboto(
                             color: ColorManager.black,
@@ -65,7 +60,7 @@ class SkeletonHome extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
-                                'product.description ?? ' '',
+                                'product.description ',
                                 textDirection: TextDirection.rtl,
                                 maxLines: 1,
                                 textAlign: TextAlign.right,
