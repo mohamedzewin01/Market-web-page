@@ -1,4 +1,4 @@
-# Market wep page
+# fadaalhalij
 
 A Flutter Web project to display products.
 
@@ -10,9 +10,10 @@ This project is a complete web application built using **Flutter Web**, **PHP**,
 - **Backend with PHP and SQL**: The backend handles data storage and management of product listings using SQL for the database.
 - **Hosting on Hostinger**: The project is hosted on **Hostinger** for fast and reliable access.
 
-## Getting Started
+## Live Demo
 
-This project serves as a starting point for anyone interested in building a Flutter Web app integrated with a backend.
+You can check out the live demo of the application here:  
+[Visit the website](https://marketfadaalhalij.artawiya.com/)
 
 ### Watch the Demo
 
@@ -27,4 +28,3 @@ You can watch the demo video of the application via the link below:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
