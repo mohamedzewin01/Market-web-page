@@ -1,13 +1,27 @@
-# fadaalhalij
+# Market_wab_page
 
-A new Flutter project.
+A Flutter Web project to display products.
 
-## Getting Started
+This project is a complete web application built using **Flutter Web**, **PHP**, and **SQL** for the backend, hosted on **Hostinger**. The application displays a list of products fetched from a database and presented in an interactive and responsive layout.
 
-This project is a starting point for a Flutter application.
+## Features:
+- **Interactive product display**: The application fetches product data from a backend written in PHP and SQL and displays it to the user.
+- **Responsive design**: The application is fully responsive, meaning it looks great on desktops, tablets, and mobile devices.
+- **Backend with PHP and SQL**: The backend handles data storage and management of product listings using SQL for the database.
+- **Hosting on Hostinger**: The project is hosted on **Hostinger** for fast and reliable access.
 
-A few resources to get you started if this is your first Flutter project:
+## Live Demo
 
+You can check out the live demo of the application here:  
+[Visit the website](https://marketfadaalhalij.artawiya.com/)
+
+### Watch the Demo
+
+You can watch the demo video of the application via the link below:
+
+[![Watch the video](https://img.youtube.com/vi/ku5gkG0B36w/0.jpg)](https://youtube.com/shorts/ku5gkG0B36w?feature=share)
+
+### Resources to Get Started:
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
