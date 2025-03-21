@@ -20,25 +20,25 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProductModel> getAllCategories() async {
+  Future<StoreModelResponse> getAllCategories() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProductModel>(
+    final _options = _setStreamType<StoreModelResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'products/fetchAllProducts.php',
+            'home/home_view.php',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProductModel _value;
+    late StoreModelResponse _value;
     try {
-      _value = ProductModel.fromJson(_result.data!);
+      _value = StoreModelResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

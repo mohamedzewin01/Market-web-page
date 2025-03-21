@@ -4,9 +4,10 @@ import 'package:fadaalhalij/core/resources/style_manager.dart';
 import 'package:fadaalhalij/features/products/presentation/widgets/skeleton_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../data/models/StoreModelResponse.dart';
 import '../manager/products_cubit.dart';
+import '../widgets/app_bar_body.dart';
 import '../widgets/product_home.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -42,38 +43,29 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   return const SkeletonHome();
                 }
                 if (state is ProductsSuccess) {
+                  List<BestDeals>? productsList = state
+                      .productModelEntity.data?.products?.bestDeals?.reversed
+                      .toList();
                   return Column(
                     children: [
                       Expanded(
                         child: NestedScrollView(
                             headerSliverBuilder: (context, innerBoxIsScrolled) {
                               return [
-                                SliverAppBar(
-                                    backgroundColor: ColorManager.white,
-                                    title: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 30, left: 30),
-                                      child: Text(
-                                        'فضاء الخليج',
-                                        style: GoogleFonts.harmattan(
-                                            fontSize: 35,
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorManager.white),
-                                      ),
-                                    ),
-                                    expandedHeight: 200,
-                                    flexibleSpace: FlexibleSpaceBar(
-                                      centerTitle: true,
-                                      background: Image.asset(
-                                        'assets/images/delivery-goods-blue-surface.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )),
+                                AppBarBody(
+                                  store: state.productModelEntity.data?.store,
+                                ),
                               ];
                             },
-                            body: HomeBody(
-                              productsList:
-                                  state.productModelEntity.products ?? [],
+                            body: RefreshIndicator(
+                              color: ColorManager.error,
+                              backgroundColor: ColorManager.white,
+                              onRefresh: () {
+                                return viewModel.getProductsData();
+                              },
+                              child: HomeBody(
+                                productsList: productsList ?? [],
+                              ),
                             )),
                       ),
                       Center(
@@ -81,12 +73,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         children: [
                           Expanded(
                             child: Container(
-                                color: ColorManager.yellow,
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                color: ColorManager.primaryColor,
                                 child: Center(
                                     child: Text(
-                                  'تموينات فضاء الخيلج - الارطاوية ',
+                                  maxLines: 1,
+                                  textDirection: TextDirection.rtl,
+                                  overflow: TextOverflow.ellipsis,
+                                  state.productModelEntity.data?.store
+                                          ?.storeDiscountTitle ??
+                                      '',
                                   style:
-                                      getBoldStyle(color: ColorManager.error),
+                                      getBoldStyle(color: ColorManager.black),
                                 ))),
                           ),
                         ],
@@ -94,7 +92,23 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     ],
                   );
                 }
-                return Center(child: Text('error'));
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'فضاء الخليج ترحب بكم',
+                        style: getSemiBoldStyle(color: ColorManager.primary),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      CircularProgressIndicator(
+                        color: ColorManager.primaryColor,
+                      )
+                    ],
+                  ),
+                );
               },
             ),
           ),

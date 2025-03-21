@@ -7,7 +7,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
-import '../../domain/products_entities/products_entities.dart';
+import '../../data/models/StoreModelResponse.dart';
 
 class CustomProductsItem extends StatelessWidget {
   const CustomProductsItem({
@@ -16,7 +16,7 @@ class CustomProductsItem extends StatelessWidget {
     this.onTap,
   });
 
-  final ProductsEntity product;
+  final BestDeals product;
   final void Function()? onTap;
 
   @override
@@ -69,7 +69,7 @@ class CustomProductsItem extends StatelessWidget {
                       textDirection: TextDirection.rtl,
                       style: GoogleFonts.roboto(
                           color: ColorManager.black,
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold),
                       maxLines: 1,
                     ),
@@ -103,7 +103,7 @@ class CustomProductsItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          product.productpriceAfterDiscount != 0
+                          product.productPrice != 0
                               ? Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -115,7 +115,7 @@ class CustomProductsItem extends StatelessWidget {
                                       width: 3,
                                     ),
                                     Text(
-                                      product.productprice.toString(),
+                                      product.productPrice.toString(),
                                       style: const TextStyle(
                                         color: ColorManager.primary,
                                         fontWeight: FontWeight.bold,
@@ -128,9 +128,11 @@ class CustomProductsItem extends StatelessWidget {
                                   ],
                                 )
                               : const SizedBox(),
-                          VerticalDivider(
-                            color: ColorManager.placeHolderColor,
-                          ),
+                          product.productPrice != 0
+                              ? VerticalDivider(
+                                  color: ColorManager.placeHolderColor,
+                                )
+                              : SizedBox(),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -139,10 +141,10 @@ class CustomProductsItem extends StatelessWidget {
                                 width: 3,
                               ),
                               Text(
-                                product.productpriceAfterDiscount.toString(),
+                                product.productPriceAfterDiscount.toString(),
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: ColorManager.error),
                               ),
                             ],
@@ -155,6 +157,39 @@ class CustomProductsItem extends StatelessWidget {
               ],
             ),
           ),
+          // Positioned(
+          //   bottom: 48,
+          //   right: 0,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //   ),
+          // ),
+          product.productPrice == 0
+              ? SizedBox()
+              : Positioned(
+                  top: 0, // to shift little up
+                  left: 0,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: ColorManager.error,
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(8))),
+                      padding: EdgeInsets.all(8),
+                      child: Column(
+                        children: [
+                          Text("${product.descount}%",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorManager.white)),
+                          Text("خصم",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorManager.white))
+                        ],
+                      )),
+                )
         ],
       ),
     );

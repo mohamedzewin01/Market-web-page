@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -10,15 +10,18 @@
 
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
   -->
   <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="A new Flutter project for web." name="description">
+  <meta content="flutter, web, fadaalhalij, example" name="keywords">
+  <meta content="Your Name" name="author">
+  <meta content="fadaalhalij" property="og:title">
+  <meta content="A new Flutter project for web." property="og:description">
+  <meta content="icons/Icon-192.png" property="og:image">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -31,26 +34,47 @@
 
   <title>fadaalhalij</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Disable cache during development -->
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control">
+  <meta content="no-cache" http-equiv="Pragma">
+  <meta content="0" http-equiv="Expires">
 </head>
 <body>
-<script type="text/javascript"> window.flutterWebRenderer = "html"; </script>
-<script async src="flutter_bootstrap.js"></script>
-<script>
-  window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-          serviceWorker: {
-              serviceWorkerVersion: serviceWorkerVersion,
-          },
-          onEntrypointLoaded: function(engineInitializer) {
-              engineInitializer.initializeEngine({ renderer: "html" }).then(function(appRunner) {
-                  appRunner.runApp();
-              });
-          }
-      });
-  });
+<script type="text/javascript">
+  window.flutterWebRenderer = "html";
 </script>
 
+<!-- Include flutter bootstrap script with cache-busting -->
+<script async src="flutter_bootstrap.js?v=1.0.1"></script>
 
+<script>
+  const serviceWorkerVersion = '1.0.1'; // Update this with each new release.
+
+  // Ensure service worker is updated
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('flutter_service_worker.js?v=' + serviceWorkerVersion)
+      .then(function(registration) {
+        console.log('Service Worker registered with version:', serviceWorkerVersion);
+      })
+      .catch(function(error) {
+        console.error('Service Worker registration failed:', error);
+      });
+  }
+
+  // Load the Flutter app
+  window.addEventListener('load', function(ev) {
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+        serviceWorkerVersion: serviceWorkerVersion,
+      },
+      onEntrypointLoaded: function(engineInitializer) {
+        engineInitializer.initializeEngine({ renderer: "html" }).then(function(appRunner) {
+          appRunner.runApp();
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
